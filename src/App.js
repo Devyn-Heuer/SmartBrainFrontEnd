@@ -67,23 +67,25 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
     fetch("http://localhost:3000/imageurl", {
-      method: "post",
+      method: "POST",
+      mode: 'cors',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         input: this.state.input,
       }),
     })
-      .then((response) => response.json())
+      .then((resp) => resp.json())
       .then((response) => {
         if (response) {
           fetch("http://localhost:3000/image", {
-            method: "put",
+            method: "PUT",
+            mode: 'cors',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               id: this.state.user.id,
             }),
           })
-            .then((response) => response.json())
+            .then((res) => res.json())
             .then((count) => {
               this.setState(Object.assign(this.state.user, { entries: count }));
             })
@@ -94,13 +96,13 @@ class App extends Component {
       .catch((err) => console.log(err));
   };
 
-  onRouteChange = (route) => {
-    if (route === "signout") {
+  onRouteChange = (route_provided) => {
+    if (route_provided === "signout") {
       this.setState(initialState);
-    } else if (route === "home") {
+    } else if (route_provided === "home") {
       this.setState({ isSignedIn: true });
     }
-    this.setState({ route: route });
+    this.setState({ route: route_provided });
   };
 
   render() {
