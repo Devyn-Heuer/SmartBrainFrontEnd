@@ -1,0 +1,11 @@
+.Tilty {
+  background: linear-gradient(89deg, #ff5edf 0%, #04c8de 100%);
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
